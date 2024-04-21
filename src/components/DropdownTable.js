@@ -73,15 +73,11 @@ const DropdownTable = ({ assetName }) => {
                       <TableCell component="th" scope="row">
                         {asset.name}
                       </TableCell>
-                      <TableCell align="middle">{asset.name}</TableCell>
-                      <TableCell align="middle">{asset.ticker}</TableCell>
-                      <TableCell align="middle">{asset.avg_price}</TableCell>
-                      <TableCell align="middle">
-                        {asset.latest_chg_pct}
-                      </TableCell>
-                      <TableCell align="middle">
-                        {asset.market_value_ccy}
-                      </TableCell>
+                      <TableCell align="middle"><span>{asset.name}</span></TableCell>
+                      <TableCell align="middle"><span>{asset.ticker}</span></TableCell>
+                      <TableCell align="middle"><span>{asset.avg_price}</span></TableCell>
+                      <TableCell align="middle">{asset.latest_chg_pct < 0 ? <span className='text-red-500'>{asset.latest_chg_pct}</span> : <span>{asset.latest_chg_pct}</span>}</TableCell>
+                      <TableCell align="middle">{asset.market_value_ccy < 0 ? <span className='text-red-500'>{asset.market_value_ccy}</span> : <span>{asset.market_value_ccy}</span>}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
