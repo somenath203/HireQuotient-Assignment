@@ -26,16 +26,32 @@ const DropdownTable = ({ assetName }) => {
 
   const [assetClass, setAssetClass] = useState('');
   const [assets, setAssets] = useState([]);
+  const [loading, setLoading] = useState();
 
   const apiFetch = async () => {
-    const { data } = await axios.get(
-      'https://canopy-frontend-task.vercel.app/api/holdings'
-    );
 
-    setAssetClass(assetName);
-    setAssets(
-      data?.payload?.filter((asset) => asset.asset_class === assetName)
-    );
+    try {
+
+      setLoading(true);
+      
+      const { data } = await axios.get(
+        'https://canopy-frontend-task.vercel.app/api/holdings'
+      );
+
+      setLoading(false);
+  
+      setAssetClass(assetName);
+      setAssets(
+        data?.payload?.filter((asset) => asset.asset_class === assetName)
+      );
+
+    } catch (error) {
+      
+      setLoading(false);
+
+      console.log(error);
+
+    }
 
   };
 
@@ -44,7 +60,9 @@ const DropdownTable = ({ assetName }) => {
   }, []);
 
   return (
-    <div>
+    <>
+
+<div>
       <div>
         <Accordion>
           <AccordionSummary
@@ -87,6 +105,10 @@ const DropdownTable = ({ assetName }) => {
         </Accordion>
       </div>
     </div>
+
+    {loading && <span className='my-3'> <i className="fa-solid fa-rotate-right animate-spin duration-100"></i> Loading {assetName} data from API</span>}
+
+    </>
   );
 };
 
