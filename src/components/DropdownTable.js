@@ -85,17 +85,15 @@ const DropdownTable = ({ assetName }) => {
                 <TableBody>
                   {assets.map((asset) => (
                     <TableRow
-                      key={asset.name}
+                      key={asset.asset_class}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
-                      <TableCell component="th" scope="row">
-                        {asset.name}
-                      </TableCell>
-                      <TableCell align="middle"><span>{asset.name}</span></TableCell>
-                      <TableCell align="middle"><span>{asset.ticker}</span></TableCell>
-                      <TableCell align="middle"><span>{asset.avg_price}</span></TableCell>
-                      <TableCell align="middle">{asset.latest_chg_pct < 0 ? <span className='text-red-500'>{asset.latest_chg_pct}</span> : <span>{asset.latest_chg_pct}</span>}</TableCell>
-                      <TableCell align="middle">{asset.market_value_ccy < 0 ? <span className='text-red-500'>{asset.market_value_ccy}</span> : <span>{asset.market_value_ccy}</span>}</TableCell>
+                      {asset.asset_class ? <TableCell align="middle"><span>{asset.asset_class}</span></TableCell> : <TableCell align="middle"><span>NA</span></TableCell>}
+                      {asset.ticker ? <TableCell align="middle"><span>{asset.ticker}</span></TableCell> : <TableCell align="middle"><span>NA</span></TableCell>}
+                      {asset.avg_price ? <TableCell align="middle"><span>{asset.avg_price}</span></TableCell> : <TableCell align="middle"><span>NA</span></TableCell>}
+                      {asset.market_price ? <TableCell align="middle"><span>{asset.market_price}</span></TableCell> : <TableCell align="middle"><span>NA</span></TableCell>}
+                      {asset.latest_chg_pct ? <TableCell align="middle">{asset.latest_chg_pct < 0 ? <span className='text-red-500'>{asset.latest_chg_pct}</span> : <span>{asset.latest_chg_pct}</span>}</TableCell> : <TableCell align="middle"><span>NA</span></TableCell>}
+                      {asset.market_value_ccy ? <TableCell align="middle">{asset.market_value_ccy < 0 ? <span className='text-red-500'>{asset.market_value_ccy}</span> : <span>{asset.market_value_ccy}</span>}</TableCell> : <TableCell align="middle"><span>NA</span></TableCell>}
                     </TableRow>
                   ))}
                 </TableBody>
